@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --watch --entry ./src/example/main.js",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "serve": "webpack serve"
   },
   "author": "",

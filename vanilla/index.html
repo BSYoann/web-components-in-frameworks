@@ -7,7 +7,17 @@
     <title>Vite App</title>
   </head>
   <body>
-    <chart-card serie="12, 30, 15, 50, 35, 54, 12, 65, 35, 15"></chart-card>
+    <chart-card
+      class="balance-card"
+      serie="12, 30, 15, 50, 35, 54, 12, 65, 35, 15"
+      background-color="#191919"
+      line-color="#2220a4"
+      chart-width="200"
+      chart-height="50"
+    >
+      <h2 class="balance-card__title">Balance:</h2>
+      <div class="balance-card__amount">15 €</div>
+    </chart-card>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

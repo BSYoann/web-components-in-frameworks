@@ -12,12 +12,12 @@ template.innerHTML = /*html*/ `
       --line-color: #2220a4;
 
       display: block;
+      overflow: hidden;
     }
     .card {
       min-width: min-content;
       width: fit-content;
       padding: 0.5rem;
-      border-radius: 1rem;
       background: var(--bg-color, #FFF);
     }
     .chart, .ct-chart-line {
@@ -132,6 +132,12 @@ export default class ChartCard extends HTMLElement {
       series: this.series,
     };
 
+    if (this.chartHeight === undefined) {
+      this.chartHeight = this.getAttribute("chart-height");
+    }
+    if (this.chartWidth === undefined) {
+      this.chartWidth = this.getAttribute("chart-width");
+    }
     const options = {
       height: this.chartHeight,
       width: this.chartWidth,
