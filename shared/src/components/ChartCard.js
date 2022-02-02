@@ -1,17 +1,6 @@
 // import chartistStyle from "../style/chartist.min.css";
 import Chartist from "https://cdn.skypack.dev/chartist";
 
-function createSVGNode(node, attributes) {
-  const nodeCreated = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    node
-  );
-  for (const attr in attributes) {
-    nodeCreated.setAttributeNS(null, attr, attributes[attr]);
-  }
-  return nodeCreated;
-}
-
 const template = document.createElement("template");
 template.innerHTML = /*html*/ `
   <style>
