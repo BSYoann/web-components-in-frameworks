@@ -58,22 +58,28 @@ template.innerHTML = /*html*/ `
 
 export default class ChartCard extends HTMLElement {
   static get observedAttributes() {
-    return ["serie", "line-color", "background-color", "width", "height"];
+    return [
+      "serie",
+      "line-color",
+      "background-color",
+      "chart-width",
+      "chart-height",
+    ];
   }
 
-  get width() {
-    return this._width;
+  get chartWidth() {
+    return this._chartWidth;
   }
-  set width(value) {
-    this._width = value;
-    this.setAttribute("width", value);
+  set chartWidth(value) {
+    this._chartWidth = value;
+    this.setAttribute("chart-width", value);
   }
-  get height() {
-    return this._height;
+  get chartHeight() {
+    return this._chartHeight;
   }
-  set height(value) {
-    this._height = value;
-    this.setAttribute("height", value);
+  set chartHeight(value) {
+    this._chartHeight = value;
+    this.setAttribute("chart-height", value);
   }
 
   get serie() {
@@ -127,8 +133,8 @@ export default class ChartCard extends HTMLElement {
     };
 
     const options = {
-      height: this.height,
-      width: this.width,
+      height: this.chartHeight,
+      width: this.chartWidth,
       showPoint: false,
       chartPadding: {
         top: 0,
@@ -187,9 +193,9 @@ export default class ChartCard extends HTMLElement {
       this.style.setProperty("--line-color", newValue);
     } else if (attributeName === "background-color") {
       this.style.setProperty("--bg-color", newValue);
-    } else if (this._chart && attributeName === "width") {
+    } else if (this._chart && attributeName === "chart-width") {
       this._chart.update(null, { width: newValue }, true);
-    } else if (this._chart && attributeName === "height") {
+    } else if (this._chart && attributeName === "chart-height") {
       this._chart.update(null, { height: newValue }, true);
     }
   }

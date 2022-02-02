@@ -24,13 +24,12 @@
     :serie.prop="serie"
     background-color="#191919"
     :line-color="lineColor"
-    :width="width"
-    :height="height"
+    :chart-width="width"
+    :chart-height="height"
   >
     <h2 class="card-header">Balance:</h2>
     <div class="balance-amount">{{ currentBalance }} €</div>
   </ce-chart-card>
-  <ce-chart-card serie="12, 30, 15, 50, 35, 54, 12, 65, 35, 15"></ce-chart-card>
 </template>
 
 <script lang="ts" setup>
