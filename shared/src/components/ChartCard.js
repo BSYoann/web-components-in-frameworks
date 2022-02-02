@@ -38,7 +38,7 @@ template.innerHTML = /*html*/ `
       color: var(--line-color, #000);
     }
   </style>
-  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" >
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: block">
     <defs>
       <linearGradient id="Gradient1">
         <stop class="grad-bg" offset="0%" stop-color="currentColor"/>
@@ -119,6 +119,9 @@ export default class ChartCard extends HTMLElement {
   connectedCallback() {
     const chartContainer = this.shadowRoot.querySelector("#chart-container");
 
+    if (this.serie === undefined) {
+      this.serie = this.getAttribute("serie");
+    }
     const data = {
       series: this.series,
     };
