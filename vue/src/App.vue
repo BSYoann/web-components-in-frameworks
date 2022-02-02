@@ -28,15 +28,13 @@
     :height="height"
   >
     <h2 class="card-header">Balance:</h2>
-    <div style="text-align: center; color: #e9e9e9">
-      {{ serie[serie.length - 1] }} €
-    </div>
+    <div class="balance-amount">{{ currentBalance }} €</div>
   </ce-chart-card>
-  <ce-chart-card serie="13, 54, 34"></ce-chart-card>
+  <ce-chart-card serie="12, 30, 15, 50, 35, 54, 12, 65, 35, 15"></ce-chart-card>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const width = ref(200);
 const height = ref(100);
@@ -44,15 +42,17 @@ const height = ref(100);
 const lineColor = ref("#2220a4");
 
 function generateRandomArray() {
-  const arrayLength = 10;
+  const arrayLength = 20;
   return Array.from({ length: arrayLength }, () =>
     Math.floor(Math.random() * 100)
   );
 }
 
-const serie = ref<Array<number | string>>([
-  12, 30, 15, 50, 35, 54, 12, 65, 35, 15,
-]);
+const serie = ref<Array<number | string>>(generateRandomArray());
+const currentBalance = computed(() => {
+  const length = serie.value.length;
+  return length > 0 ? serie.value[length - 1] : 0;
+});
 </script>
 
 <style>
@@ -61,7 +61,18 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #eaeaea;
 }
+.line-chart {
+  display: inline-block;
+}
 .card-header {
   color: #e9e9e9;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.balance-amount {
+  text-align: center;
+  color: #e9e9e9;
+  margin-bottom: 1rem;
 }
 </style>

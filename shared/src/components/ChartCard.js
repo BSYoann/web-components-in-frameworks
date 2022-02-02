@@ -30,12 +30,9 @@ template.innerHTML = /*html*/ `
       padding: 0.5rem;
       border-radius: 1rem;
       background: var(--bg-color, #FFF);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
     .chart, .ct-chart-line {
-      width: 100%
+      width: 100%;
       height: 100%;
     }
     .ct-line {
@@ -44,7 +41,24 @@ template.innerHTML = /*html*/ `
       fill: none;
       stroke-width: 5px;
     }
+
+    .grad-bg {
+      color: var(--bg-color, #FFF);
+    }
+    .grad-line {
+      color: var(--line-color, #000);
+    }
   </style>
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" >
+    <defs>
+      <linearGradient id="Gradient1">
+        <stop class="grad-bg" offset="0%" stop-color="currentColor"/>
+        <stop class="grad-line" offset="10%" stop-color="currentColor"/>
+        <stop class="grad-line" offset="90%" stop-color="currentColor"/>
+        <stop class="grad-bg" offset="100%" stop-color="currentColor"/>
+      </linearGradient>
+    </defs>
+  </svg>
   <div id="card-root" class="card">
     <div class="header">
       <slot></slot>
@@ -78,17 +92,14 @@ export default class ChartCard extends HTMLElement {
   }
   set serie(value) {
     if (typeof value === "string") {
-      value = value.split(", ");
+      value = value.split(", ").map((e) => parseInt(e, 10));
     }
     this._serie = value;
     this.setAttribute("serie", value);
   }
 
   get series() {
-    if (this.serie) {
-      return [this.serie];
-    }
-    return [[]];
+    return this.serie ? [this.serie] : [[]];
   }
 
   get lineColor() {
@@ -117,72 +128,13 @@ export default class ChartCard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.createSVGLineGradient();
-    this.createLineChart();
-  }
-
-  /**
-   *  triggered on mount, and every time an observed attribute change
-   * @param {string} attributeName
-   * @param {string} oldValue
-   * @param {string} newValue
-   */
-  attributeChangedCallback(attributeName, oldValue, newValue) {
-    if (this.chart && attributeName === "serie" && oldValue !== newValue) {
-      this.chart.update({ series: this.series });
-    } else if (attributeName === "line-color" && oldValue !== newValue) {
-      this.style.setProperty("--line-color", newValue);
-    } else if (attributeName === "background-color" && oldValue !== newValue) {
-      this.style.setProperty("--bg-color", newValue);
-    } else if (
-      this.chart &&
-      attributeName === "width" &&
-      oldValue !== newValue
-    ) {
-      this.chart.update(null, { width: Number.parseInt(newValue) }, true);
-    } else if (
-      this.chart &&
-      attributeName === "height" &&
-      oldValue !== newValue
-    ) {
-      this.chart.update(null, { height: Number.parseInt(newValue) }, true);
-    }
-  }
-
-  createSVGLineGradient() {
-    const svgLineGradient = createSVGNode("svg", {
-      width: 0,
-      height: 0,
-    });
-    svgLineGradient.innerHTML = /*svg*/ `
-      <style>
-        .grad-bg {
-          color: var(--bg-color, #FFF);
-        }
-        .grad-line {
-          color: var(--line-color, #000);
-        }
-      </style>
-      <defs>
-        <linearGradient id="Gradient1">
-          <stop class="grad-bg" offset="0%" stop-color="currentColor"/>
-          <stop class="grad-line" offset="10%" stop-color="currentColor"/>
-          <stop class="grad-line" offset="90%" stop-color="currentColor"/>
-          <stop class="grad-bg" offset="100%" stop-color="currentColor"/>
-        </linearGradient>
-      </defs>
-    `;
-    this.shadowRoot.appendChild(svgLineGradient);
-  }
-
-  createLineChart() {
     const chartContainer = this.shadowRoot.querySelector("#chart-container");
 
-    this.chartData = {
+    const data = {
       series: this.series,
     };
 
-    this.chartOptions = {
+    const options = {
       height: this.height,
       width: this.width,
       showPoint: false,
@@ -204,21 +156,17 @@ export default class ChartCard extends HTMLElement {
       },
     };
 
-    this.chart = new Chartist.Line(
-      chartContainer,
-      this.chartData,
-      this.chartOptions
-    );
+    this._chart = new Chartist.Line(chartContainer, data, options);
 
-    this.chart.on("draw", (data) => {
+    this._chart.on("draw", (data) => {
       if (data.type === "line") {
         let fromAnimation = data.path
           .clone()
           .scale(1, 0)
           .translate(0, data.chartRect.height())
           .stringify();
-        if (this.oldData) {
-          fromAnimation = this.oldData.path.clone().stringify();
+        if (this._oldData) {
+          fromAnimation = this._oldData.path.clone().stringify();
         }
         data.element.animate({
           d: {
@@ -229,8 +177,28 @@ export default class ChartCard extends HTMLElement {
             easing: Chartist.Svg.Easing.easeOutQuint,
           },
         });
-        this.oldData = data;
+        this._oldData = data;
       }
     });
+  }
+
+  /**
+   *  triggered on mount, and every time an observed attribute change
+   * @param {string} attributeName
+   * @param {string} oldValue
+   * @param {string} newValue
+   */
+  attributeChangedCallback(attributeName, oldValue, newValue) {
+    if (this._chart && attributeName === "serie") {
+      this._chart.update({ series: this.series });
+    } else if (attributeName === "line-color") {
+      this.style.setProperty("--line-color", newValue);
+    } else if (attributeName === "background-color") {
+      this.style.setProperty("--bg-color", newValue);
+    } else if (this._chart && attributeName === "width") {
+      this._chart.update(null, { width: newValue }, true);
+    } else if (this._chart && attributeName === "height") {
+      this._chart.update(null, { height: newValue }, true);
+    }
   }
 }
