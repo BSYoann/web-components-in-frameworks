@@ -9,7 +9,7 @@ function generateRandomArray(): number[] {
 }
 
 function App() {
-  const [serie, setSerie] = useState(generateRandomArray());
+  const [serie, setSerie] = useState<number[]>(generateRandomArray());
   const [bgColor, setBgColor] = useState("#191919")
   const [lineColor, setLineColor] = useState("#2220a4")
   const [width, setWidth] = useState<number | string>(200);

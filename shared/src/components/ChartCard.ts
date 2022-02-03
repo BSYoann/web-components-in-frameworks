@@ -133,8 +133,7 @@ export default class ChartCard extends HTMLElement {
     super();
 
     this._lineColor = getComputedStyle(this).getPropertyValue("--line-color");
-    this._backgroundColor =
-      getComputedStyle(this).getPropertyValue("--bg-color");
+    this._backgroundColor = getComputedStyle(this).getPropertyValue("--bg-color");
 
     this._shadowRoot = this.attachShadow({ mode: "open" });
     // we don't really need the library style since we simply use line chart
@@ -147,11 +146,7 @@ export default class ChartCard extends HTMLElement {
     const chartContainer = this._shadowRoot.querySelector("#chart-container");
 
     const serieAttribute = this.getAttribute("serie");
-    if (
-      serieAttribute !== null &&
-      serieAttribute !== "" &&
-      this.serie === undefined
-    ) {
+    if (serieAttribute !== null && serieAttribute !== "" && this.serie === undefined) {
       this.serie = serieAttribute;
     }
     const data = {
@@ -228,11 +223,7 @@ export default class ChartCard extends HTMLElement {
    * @param {string} oldValue
    * @param {string} newValue
    */
-  attributeChangedCallback(
-    attributeName: ObservedAttribute,
-    oldValue: string,
-    newValue: string
-  ) {
+  attributeChangedCallback(attributeName: ObservedAttribute, oldValue: string, newValue: string) {
     if (this._chart && attributeName === "serie") {
       this._chart.update({ series: this.series });
     } else if (attributeName === "line-color") {
