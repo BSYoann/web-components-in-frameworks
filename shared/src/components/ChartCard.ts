@@ -58,6 +58,16 @@ template.innerHTML = /*html*/ `
   </div>
 `;
 
+const observedAttributesArray = [
+  "serie",
+  "line-color",
+  "background-color",
+  "chart-width",
+  "chart-height",
+] as const;
+
+type ObservedAttribute = typeof observedAttributesArray[number];
+
 export default class ChartCard extends HTMLElement {
   private _serie!: number[];
   private _chartWidth: number | string | undefined;
@@ -69,13 +79,7 @@ export default class ChartCard extends HTMLElement {
   private _shadowRoot: ShadowRoot;
 
   static get observedAttributes() {
-    return [
-      "serie",
-      "line-color",
-      "background-color",
-      "chart-width",
-      "chart-height",
-    ];
+    return observedAttributesArray;
   }
 
   get chartWidth() {
@@ -225,7 +229,7 @@ export default class ChartCard extends HTMLElement {
    * @param {string} newValue
    */
   attributeChangedCallback(
-    attributeName: string,
+    attributeName: ObservedAttribute,
     oldValue: string,
     newValue: string
   ) {

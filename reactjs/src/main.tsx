@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 
-import { ChartCard } from '../../shared/dist/chartcard.min.js';
+import { ChartCard } from '../../shared/src/index';
 
 customElements.define("chart-card", ChartCard);
 

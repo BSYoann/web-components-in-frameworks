@@ -56,6 +56,13 @@ template.innerHTML = /*html*/ `
     <div id="chart-container" class="chart"></div>
   </div>
 `;
+const observedAttributesArray = [
+    "serie",
+    "line-color",
+    "background-color",
+    "chart-width",
+    "chart-height",
+];
 class ChartCard extends HTMLElement {
     constructor() {
         super();
@@ -68,13 +75,7 @@ class ChartCard extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
     }
     static get observedAttributes() {
-        return [
-            "serie",
-            "line-color",
-            "background-color",
-            "chart-width",
-            "chart-height",
-        ];
+        return observedAttributesArray;
     }
     get chartWidth() {
         return this._chartWidth;
