@@ -39,10 +39,22 @@
     <h2 class="balance-card__title">Balance:</h2>
     <div class="balance-card__amount">{{ currentBalance }} €</div>
   </ce-chart-card>
+  <ChartCardWrapper
+    class="balance-card"
+    :serie="serie"
+    :background-color="bgColor"
+    :line-color="lineColor"
+    :chart-width="width"
+    :chart-height="height"
+  >
+    <h2 class="balance-card__title">Balance:</h2>
+    <div class="balance-card__amount">{{ currentBalance }} €</div>
+  </ChartCardWrapper>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
+import ChartCardWrapper from "./components/ChartCardWrapper.vue";
 
 const width = ref(200);
 const height = ref(100);
@@ -57,7 +69,7 @@ function generateRandomArray() {
   );
 }
 
-const serie = ref<Array<number | string>>(generateRandomArray());
+const serie = ref<number[]>(generateRandomArray());
 const currentBalance = computed(() => {
   const length = serie.value.length;
   return length > 0 ? serie.value[length - 1] : 0;
