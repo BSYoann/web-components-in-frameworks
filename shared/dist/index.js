@@ -1,1 +1,212 @@
-import*as t from"https://cdn.skypack.dev/chartist";var e={d:(t,r)=>{for(var i in r)e.o(r,i)&&!e.o(t,i)&&Object.defineProperty(t,i,{enumerable:!0,get:r[i]})},o:(t,e)=>Object.prototype.hasOwnProperty.call(t,e)},r={};e.d(r,{t:()=>h});const i=(o={default:()=>t.default},n={},e.d(n,o),n),s=document.createElement("template");var o,n;s.innerHTML='\n  <style>\n    *, *::before, *::after {\n      box-sizing: border-box;\n    }\n    :host {\n      --bg-color: #191919;\n      --line-color: #2220a4;\n\n      display: inline-block;\n      overflow: hidden;\n      border-radius: 1rem;\n    }\n    .card {\n      min-width: min-content;\n      width: fit-content;\n      padding: 0.5rem;\n      background: var(--bg-color, #FFF);\n    }\n    .chart, .ct-chart-line {\n      width: 100%;\n      height: 100%;\n    }\n    .ct-line {\n      stroke: var(--line-color, #000);\n      stroke: url(#Gradient1);\n      fill: none;\n      stroke-width: 5px;\n    }\n\n    .grad-bg {\n      color: var(--bg-color, #FFF);\n    }\n    .grad-line {\n      color: var(--line-color, #000);\n    }\n  </style>\n  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: block">\n    <defs>\n      <linearGradient id="Gradient1">\n        <stop class="grad-bg" offset="0%" stop-color="currentColor"/>\n        <stop class="grad-line" offset="10%" stop-color="currentColor"/>\n        <stop class="grad-line" offset="90%" stop-color="currentColor"/>\n        <stop class="grad-bg" offset="100%" stop-color="currentColor"/>\n      </linearGradient>\n    </defs>\n  </svg>\n  <div id="card-root" class="card">\n    <div class="header">\n      <slot></slot>\n    </div>\n    <div id="chart-container" class="chart"></div>\n  </div>\n';class h extends HTMLElement{static get observedAttributes(){return["serie","line-color","background-color","chart-width","chart-height"]}get chartWidth(){return this._chartWidth}set chartWidth(t){this._chartWidth=t,this.setAttribute("chart-width",t)}get chartHeight(){return this._chartHeight}set chartHeight(t){this._chartHeight=t,this.setAttribute("chart-height",t)}get serie(){return this._serie}set serie(t){"string"==typeof t&&(t=t.split(", ").map((t=>parseInt(t,10)))),this._serie=t,this.setAttribute("serie",t)}get series(){return this.serie?[this.serie]:[[]]}get lineColor(){return this._lineColor}set lineColor(t){this._lineColor=t,this.setAttribute("line-color",t)}get backgroundColor(){return this._backgroundColor}set backgroundColor(t){this._backgroundColor=t,this.setAttribute("background-color",t)}constructor(){super(),this.attachShadow({mode:"open"}),this.shadowRoot.appendChild(s.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.querySelector("#chart-container");void 0===this.serie&&(this.serie=this.getAttribute("serie"));const e={series:this.series};void 0===this.chartHeight&&(this.chartHeight=this.getAttribute("chart-height")),void 0===this.chartWidth&&(this.chartWidth=this.getAttribute("chart-width"));const r={height:this.chartHeight,width:this.chartWidth,showPoint:!1,chartPadding:{top:0,right:0,bottom:0,left:20},axisX:{offset:0,showGrid:!1,showLabel:!1},axisY:{offset:0,showGrid:!1,showLabel:!1}};this._chart=new i.default.Line(t,e,r),this._chart.on("draw",(t=>{if("line"===t.type){let e=t.path.clone().scale(1,0).translate(0,t.chartRect.height()).stringify();this._oldData&&(e=this._oldData.path.clone().stringify()),t.element.animate({d:{begin:2e3*t.index,dur:2e3,from:e,to:t.path.clone().stringify(),easing:i.default.Svg.Easing.easeOutQuint}}),this._oldData=t}}))}attributeChangedCallback(t,e,r){this._chart&&"serie"===t?this._chart.update({series:this.series}):"line-color"===t?this.style.setProperty("--line-color",r):"background-color"===t?this.style.setProperty("--bg-color",r):this._chart&&"chart-width"===t?this._chart.update(null,{width:r},!0):this._chart&&"chart-height"===t&&this._chart.update(null,{height:r},!0)}}var a=r.t;export{a as ChartCard};
+import Chartist from 'https://cdn.skypack.dev/chartist';
+
+// import chartistStyle from "../style/chartist.min.css";
+
+const template = document.createElement("template");
+template.innerHTML = /*html*/ `
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    :host {
+      --bg-color: #191919;
+      --line-color: #2220a4;
+
+      display: inline-block;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+    .card {
+      min-width: min-content;
+      width: fit-content;
+      padding: 0.5rem;
+      background: var(--bg-color, #FFF);
+    }
+    .chart, .ct-chart-line {
+      width: 100%;
+      height: 100%;
+    }
+    .ct-line {
+      stroke: var(--line-color, #000);
+      stroke: url(#Gradient1);
+      fill: none;
+      stroke-width: 5px;
+    }
+
+    .grad-bg {
+      color: var(--bg-color, #FFF);
+    }
+    .grad-line {
+      color: var(--line-color, #000);
+    }
+  </style>
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: block">
+    <defs>
+      <linearGradient id="Gradient1">
+        <stop class="grad-bg" offset="0%" stop-color="currentColor"/>
+        <stop class="grad-line" offset="10%" stop-color="currentColor"/>
+        <stop class="grad-line" offset="90%" stop-color="currentColor"/>
+        <stop class="grad-bg" offset="100%" stop-color="currentColor"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div id="card-root" class="card">
+    <div class="header">
+      <slot></slot>
+    </div>
+    <div id="chart-container" class="chart"></div>
+  </div>
+`;
+
+class ChartCard extends HTMLElement {
+  static get observedAttributes() {
+    return [
+      "serie",
+      "line-color",
+      "background-color",
+      "chart-width",
+      "chart-height",
+    ];
+  }
+
+  get chartWidth() {
+    return this._chartWidth;
+  }
+  set chartWidth(value) {
+    this._chartWidth = value;
+    this.setAttribute("chart-width", value);
+  }
+  get chartHeight() {
+    return this._chartHeight;
+  }
+  set chartHeight(value) {
+    this._chartHeight = value;
+    this.setAttribute("chart-height", value);
+  }
+
+  get serie() {
+    return this._serie;
+  }
+  set serie(value) {
+    if (typeof value === "string") {
+      value = value.split(", ").map((e) => parseInt(e, 10));
+    }
+    this._serie = value;
+    this.setAttribute("serie", value);
+  }
+
+  get series() {
+    return this.serie ? [this.serie] : [[]];
+  }
+
+  get lineColor() {
+    return this._lineColor;
+  }
+  set lineColor(value) {
+    this._lineColor = value;
+    this.setAttribute("line-color", value);
+  }
+
+  get backgroundColor() {
+    return this._backgroundColor;
+  }
+  set backgroundColor(value) {
+    this._backgroundColor = value;
+    this.setAttribute("background-color", value);
+  }
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    // we don't really need the library style since we simply use line chart
+    // chartistStyle.use({ target: this.shadowRoot });
+
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  connectedCallback() {
+    const chartContainer = this.shadowRoot.querySelector("#chart-container");
+
+    if (this.serie === undefined) {
+      this.serie = this.getAttribute("serie");
+    }
+    const data = {
+      series: this.series,
+    };
+
+    if (this.chartHeight === undefined) {
+      this.chartHeight = this.getAttribute("chart-height");
+    }
+    if (this.chartWidth === undefined) {
+      this.chartWidth = this.getAttribute("chart-width");
+    }
+    const options = {
+      height: this.chartHeight,
+      width: this.chartWidth,
+      showPoint: false,
+      chartPadding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 20,
+      },
+      axisX: {
+        offset: 0,
+        showGrid: false,
+        showLabel: false,
+      },
+      axisY: {
+        offset: 0,
+        showGrid: false,
+        showLabel: false,
+      },
+    };
+
+    this._chart = new Chartist.Line(chartContainer, data, options);
+
+    this._chart.on("draw", (data) => {
+      if (data.type === "line") {
+        let fromAnimation = data.path
+          .clone()
+          .scale(1, 0)
+          .translate(0, data.chartRect.height())
+          .stringify();
+        if (this._oldData) {
+          fromAnimation = this._oldData.path.clone().stringify();
+        }
+        data.element.animate({
+          d: {
+            begin: 2000 * data.index,
+            dur: 2000,
+            from: fromAnimation,
+            to: data.path.clone().stringify(),
+            easing: Chartist.Svg.Easing.easeOutQuint,
+          },
+        });
+        this._oldData = data;
+      }
+    });
+  }
+
+  /**
+   *  triggered on mount, and every time an observed attribute change
+   * @param {string} attributeName
+   * @param {string} oldValue
+   * @param {string} newValue
+   */
+  attributeChangedCallback(attributeName, oldValue, newValue) {
+    if (this._chart && attributeName === "serie") {
+      this._chart.update({ series: this.series });
+    } else if (attributeName === "line-color") {
+      this.style.setProperty("--line-color", newValue);
+    } else if (attributeName === "background-color") {
+      this.style.setProperty("--bg-color", newValue);
+    } else if (this._chart && attributeName === "chart-width") {
+      this._chart.update(null, { width: newValue }, true);
+    } else if (this._chart && attributeName === "chart-height") {
+      this._chart.update(null, { height: newValue }, true);
+    }
+  }
+}
+
+export { ChartCard };
