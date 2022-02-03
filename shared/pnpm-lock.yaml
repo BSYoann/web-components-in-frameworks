@@ -1,23 +1,29 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@rollup/plugin-typescript': ^8.3.0
   '@types/express': ^4.17.13
   css-loader: ^6.5.1
   html-webpack-plugin: ^5.5.0
   rollup: ^2.67.0
   rollup-plugin-terser: ^7.0.2
   style-loader: ^3.3.1
+  tslib: '*'
+  typescript: ^4.5.5
   webpack: ^5.67.0
   webpack-cli: ^4.9.2
   webpack-dev-server: ^4.7.3
 
 devDependencies:
+  '@rollup/plugin-typescript': 8.3.0_410d604340de00b26a012021c86f6e9f
   '@types/express': 4.17.13
   css-loader: 6.5.1_webpack@5.67.0
   html-webpack-plugin: 5.5.0_webpack@5.67.0
   rollup: 2.67.0
   rollup-plugin-terser: 7.0.2_rollup@2.67.0
   style-loader: 3.3.1_webpack@5.67.0
+  tslib: 2.3.1
+  typescript: 4.5.5
   webpack: 5.67.0_webpack-cli@4.9.2
   webpack-cli: 4.9.2_4df292f2573ba77e77217391b9684f0a
   webpack-dev-server: 4.7.3_e9a6b0c876bb47b7070003eedf8fe3a2
@@ -71,6 +77,33 @@ packages:
       fastq: 1.13.0
     dev: true
 
+  /@rollup/plugin-typescript/8.3.0_410d604340de00b26a012021c86f6e9f:
+    resolution: {integrity: sha512-I5FpSvLbtAdwJ+naznv+B4sjXZUcIvLLceYpITAn7wAP8W0wqc5noLdGIp9HGVntNhRWXctwPYrSSFQxtl0FPA==}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^2.14.0
+      tslib: '*'
+      typescript: '>=3.7.0'
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.67.0
+      resolve: 1.22.0
+      rollup: 2.67.0
+      tslib: 2.3.1
+      typescript: 4.5.5
+    dev: true
+
+  /@rollup/pluginutils/3.1.0_rollup@2.67.0:
+    resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.3.1
+      rollup: 2.67.0
+    dev: true
+
   /@types/body-parser/1.19.2:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
@@ -109,6 +142,10 @@ packages:
     dependencies:
       '@types/estree': 0.0.50
       '@types/json-schema': 7.0.9
+    dev: true
+
+  /@types/estree/0.0.39:
+    resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
     dev: true
 
   /@types/estree/0.0.50:
@@ -963,6 +1000,10 @@ packages:
   /estraverse/5.3.0:
     resolution: {integrity: sha512-MMdARuVEQziNTeJD8DgMqmhwR11BRQ/cBP+pLtYdSTnf3MIO8fFeiINEbX36ZdNlfU/7A9f3gUw49B3oQsvwBA==}
     engines: {node: '>=4.0'}
+    dev: true
+
+  /estree-walker/1.0.1:
+    resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
     dev: true
 
   /etag/1.8.1:
@@ -2497,6 +2538,12 @@ packages:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.34
+    dev: true
+
+  /typescript/4.5.5:
+    resolution: {integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
     dev: true
 
   /unpipe/1.0.0:

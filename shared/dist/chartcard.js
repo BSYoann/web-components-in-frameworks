@@ -57,13 +57,16 @@ template.innerHTML = /*html*/ `
   </div>
 `;
 class ChartCard extends HTMLElement {
-    _serie;
-    _chartWidth;
-    _chartHeight;
-    _lineColor;
-    _backgroundColor;
-    _chart;
-    _oldData;
+    constructor() {
+        super();
+        this._lineColor = getComputedStyle(this).getPropertyValue("--line-color");
+        this._backgroundColor =
+            getComputedStyle(this).getPropertyValue("--bg-color");
+        this._shadowRoot = this.attachShadow({ mode: "open" });
+        // we don't really need the library style since we simply use line chart
+        // chartistStyle.use({ target: this._shadowRoot });
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
     static get observedAttributes() {
         return [
             "serie",
@@ -77,15 +80,17 @@ class ChartCard extends HTMLElement {
         return this._chartWidth;
     }
     set chartWidth(value) {
+        var _a;
         this._chartWidth = value;
-        this.setAttribute("chart-width", value.toString(10));
+        this.setAttribute("chart-width", (_a = value === null || value === void 0 ? void 0 : value.toString(10)) !== null && _a !== void 0 ? _a : "");
     }
     get chartHeight() {
         return this._chartHeight;
     }
     set chartHeight(value) {
+        var _a;
         this._chartHeight = value;
-        this.setAttribute("chart-height", value.toString(10));
+        this.setAttribute("chart-height", (_a = value === null || value === void 0 ? void 0 : value.toString(10)) !== null && _a !== void 0 ? _a : "");
     }
     get serie() {
         return this._serie;
@@ -115,26 +120,28 @@ class ChartCard extends HTMLElement {
         this._backgroundColor = value;
         this.setAttribute("background-color", value);
     }
-    constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
-        // we don't really need the library style since we simply use line chart
-        // chartistStyle.use({ target: this.shadowRoot });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-    }
     connectedCallback() {
-        const chartContainer = this.shadowRoot.querySelector("#chart-container");
-        if (this.serie === undefined) {
-            this.serie = this.getAttribute("serie");
+        const chartContainer = this._shadowRoot.querySelector("#chart-container");
+        const serieAttribute = this.getAttribute("serie");
+        if (serieAttribute !== null &&
+            serieAttribute !== "" &&
+            this.serie === undefined) {
+            this.serie = serieAttribute;
         }
         const data = {
             series: this.series,
         };
-        if (this.chartHeight === undefined) {
-            this.chartHeight = this.getAttribute("chart-height");
+        const chartHeightAttribute = this.getAttribute("chart-height");
+        if (chartHeightAttribute !== null &&
+            chartHeightAttribute !== "" &&
+            this.chartHeight === undefined) {
+            this.chartHeight = chartHeightAttribute;
         }
-        if (this.chartWidth === undefined) {
-            this.chartWidth = this.getAttribute("chart-width");
+        const chartWidthAttribute = this.getAttribute("chart-width");
+        if (chartWidthAttribute !== null &&
+            chartWidthAttribute !== "" &&
+            this.chartWidth === undefined) {
+            this.chartWidth = chartWidthAttribute;
         }
         const options = {
             height: this.chartHeight,

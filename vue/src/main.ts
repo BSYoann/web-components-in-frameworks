@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import { ChartCard } from "../../shared/dist/index.js";
+import ChartCard from "../../shared/src/components/ChartCard";
 
 customElements.define("ce-chart-card", ChartCard);
 

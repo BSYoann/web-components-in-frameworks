@@ -1,4 +1,5 @@
 // import chartistStyle from "../style/chartist.min.css";
+// @ts-ignore
 import Chartist from "https://cdn.skypack.dev/chartist";
 
 const template = document.createElement("template");
@@ -58,6 +59,15 @@ template.innerHTML = /*html*/ `
 `;
 
 export default class ChartCard extends HTMLElement {
+  private _serie!: number[];
+  private _chartWidth: number | string | undefined;
+  private _chartHeight: number | string | undefined;
+  private _lineColor: string;
+  private _backgroundColor: string;
+  private _chart: any;
+  private _oldData: any;
+  private _shadowRoot: ShadowRoot;
+
   static get observedAttributes() {
     return [
       "serie",
@@ -73,24 +83,25 @@ export default class ChartCard extends HTMLElement {
   }
   set chartWidth(value) {
     this._chartWidth = value;
-    this.setAttribute("chart-width", value);
+    this.setAttribute("chart-width", value?.toString(10) ?? "");
   }
   get chartHeight() {
     return this._chartHeight;
   }
   set chartHeight(value) {
     this._chartHeight = value;
-    this.setAttribute("chart-height", value);
+    this.setAttribute("chart-height", value?.toString(10) ?? "");
   }
 
   get serie() {
     return this._serie;
   }
-  set serie(value) {
+  set serie(value: string | number[]) {
     if (typeof value === "string") {
       value = value.split(", ").map((e) => parseInt(e, 10));
     }
     this._serie = value;
+    // @ts-ignore
     this.setAttribute("serie", value);
   }
 
@@ -116,28 +127,48 @@ export default class ChartCard extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
-    // we don't really need the library style since we simply use line chart
-    // chartistStyle.use({ target: this.shadowRoot });
 
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this._lineColor = getComputedStyle(this).getPropertyValue("--line-color");
+    this._backgroundColor =
+      getComputedStyle(this).getPropertyValue("--bg-color");
+
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    // we don't really need the library style since we simply use line chart
+    // chartistStyle.use({ target: this._shadowRoot });
+
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback() {
-    const chartContainer = this.shadowRoot.querySelector("#chart-container");
+    const chartContainer = this._shadowRoot.querySelector("#chart-container");
 
-    if (this.serie === undefined) {
-      this.serie = this.getAttribute("serie");
+    const serieAttribute = this.getAttribute("serie");
+    if (
+      serieAttribute !== null &&
+      serieAttribute !== "" &&
+      this.serie === undefined
+    ) {
+      this.serie = serieAttribute;
     }
     const data = {
       series: this.series,
     };
 
-    if (this.chartHeight === undefined) {
-      this.chartHeight = this.getAttribute("chart-height");
+    const chartHeightAttribute = this.getAttribute("chart-height");
+    if (
+      chartHeightAttribute !== null &&
+      chartHeightAttribute !== "" &&
+      this.chartHeight === undefined
+    ) {
+      this.chartHeight = chartHeightAttribute;
     }
-    if (this.chartWidth === undefined) {
-      this.chartWidth = this.getAttribute("chart-width");
+    const chartWidthAttribute = this.getAttribute("chart-width");
+    if (
+      chartWidthAttribute !== null &&
+      chartWidthAttribute !== "" &&
+      this.chartWidth === undefined
+    ) {
+      this.chartWidth = chartWidthAttribute;
     }
     const options = {
       height: this.chartHeight,
@@ -163,7 +194,7 @@ export default class ChartCard extends HTMLElement {
 
     this._chart = new Chartist.Line(chartContainer, data, options);
 
-    this._chart.on("draw", (data) => {
+    this._chart.on("draw", (data: any) => {
       if (data.type === "line") {
         let fromAnimation = data.path
           .clone()
@@ -193,7 +224,11 @@ export default class ChartCard extends HTMLElement {
    * @param {string} oldValue
    * @param {string} newValue
    */
-  attributeChangedCallback(attributeName, oldValue, newValue) {
+  attributeChangedCallback(
+    attributeName: string,
+    oldValue: string,
+    newValue: string
+  ) {
     if (this._chart && attributeName === "serie") {
       this._chart.update({ series: this.series });
     } else if (attributeName === "line-color") {

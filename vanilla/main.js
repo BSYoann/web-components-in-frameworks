@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { ChartCard } from "../shared/dist/index.js";
+import { ChartCard } from "../shared/dist/chartcard.js";
 
 customElements.define("chart-card", ChartCard);
 
