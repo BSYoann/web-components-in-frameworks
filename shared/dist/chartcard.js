@@ -67,8 +67,7 @@ class ChartCard extends HTMLElement {
     constructor() {
         super();
         this._lineColor = getComputedStyle(this).getPropertyValue("--line-color");
-        this._backgroundColor =
-            getComputedStyle(this).getPropertyValue("--bg-color");
+        this._backgroundColor = getComputedStyle(this).getPropertyValue("--bg-color");
         this._shadowRoot = this.attachShadow({ mode: "open" });
         // we don't really need the library style since we simply use line chart
         // chartistStyle.use({ target: this._shadowRoot });
@@ -124,9 +123,7 @@ class ChartCard extends HTMLElement {
     connectedCallback() {
         const chartContainer = this._shadowRoot.querySelector("#chart-container");
         const serieAttribute = this.getAttribute("serie");
-        if (serieAttribute !== null &&
-            serieAttribute !== "" &&
-            this.serie === undefined) {
+        if (serieAttribute !== null && serieAttribute !== "" && this.serie === undefined) {
             this.serie = serieAttribute;
         }
         const data = {
