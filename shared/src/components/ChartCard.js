@@ -11,8 +11,9 @@ template.innerHTML = /*html*/ `
       --bg-color: #191919;
       --line-color: #2220a4;
 
-      display: block;
+      display: inline-block;
       overflow: hidden;
+      border-radius: 1rem;
     }
     .card {
       min-width: min-content;
