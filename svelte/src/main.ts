@@ -1,6 +1,6 @@
 import App from "./App.svelte";
 
-import ChartCard from "../../shared/src/components/ChartCard";
+import { ChartCard } from "../../shared/src/index";
 
 customElements.define("chart-card", ChartCard);
 

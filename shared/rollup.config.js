@@ -20,5 +20,9 @@ export default defineConfig({
       plugins: [terser()],
     },
   ],
-  plugins: [typescript({ target: "es6" })],
+  plugins: [
+    typescript({
+      target: "es6",
+    }),
+  ],
 });

@@ -1,6 +1,4 @@
-// import chartistStyle from "../style/chartist.min.css";
-// @ts-ignore
-import Chartist from "https://cdn.skypack.dev/chartist";
+import Chartist from "chartist";
 
 const template = document.createElement("template");
 template.innerHTML = /*html*/ `
@@ -109,8 +107,8 @@ export default class ChartCard extends HTMLElement {
     this.setAttribute("serie", value);
   }
 
-  get series() {
-    return this.serie ? [this.serie] : [[]];
+  private get series() {
+    return (this.serie ? [this.serie] : [[]]) as number[][];
   }
 
   get lineColor() {
