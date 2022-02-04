@@ -1,10 +1,39 @@
+<div class="controls">
+  <label for="width-range">Width</label>
+  <input
+    type="range"
+    name="height-range"
+    id="width-range"
+    min="100"
+    max="300"
+    [(ngModel)]="width"
+  />
+  <label for="height-range">Height</label>
+  <input
+    type="range"
+    name="height-range"
+    id="height-range"
+    min="40"
+    max="150"
+    [(ngModel)]="height"
+  />
+  <label for="bg-color">Background color: </label>
+  <input id="bg-color" type="color" [(ngModel)]="bgColor" />
+  <label for="line-color">Line color: </label>
+  <input id="line-color" type="color" [(ngModel)]="lineColor" />
+  <input
+    type="button"
+    (click)="serie = generateRandomArray()"
+    value="Generate data"
+  />
+</div>
 <chart-card
   class="balance-card"
-  serie="12, 30, 15, 50, 35, 54, 12, 65, 35, 15"
-  background-color="#191919"
-  line-color="#2220a4"
-  chart-width="200"
-  chart-height="50"
+  [serie]="serie"
+  [attr.background-color]="bgColor"
+  [attr.line-color]="lineColor"
+  [attr.chart-width]="width"
+  [attr.chart-height]="height"
 >
   <h2 class="balance-card__title">Balance:</h2>
   <div class="balance-card__amount">15 €</div>
