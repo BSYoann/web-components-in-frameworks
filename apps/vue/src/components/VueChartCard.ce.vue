@@ -74,6 +74,16 @@ watch(
 );
 
 onMounted(() => {
+  // since rootRef is undefined until mounted, we have to set CSS Vars on mount once
+  if (props.lineColor) {
+    rootRef.value!.style.setProperty("--line-color", props.lineColor);
+  }
+  if (props.backgroundColor) {
+    rootRef.value!.style.setProperty("--bg-color", props.backgroundColor);
+  }
+
+  console.log("SERIES PROP", props.serie);
+
   const data = {
     series: series.value,
   };
@@ -98,6 +108,8 @@ onMounted(() => {
       showLabel: false,
     },
   };
+
+  console.log("SERIES", data);
 
   chart.value = new Chartist.Line(chartContainerRef.value, data, options);
 

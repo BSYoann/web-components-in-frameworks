@@ -5,8 +5,11 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import { ChartCard } from '@bsyoann/chartcard';
+// @ts-ignore
+import { VueChartCard } from '../../../libs/vuechartcard/dist/index.es.js';
 
 customElements.define('chart-card', ChartCard);
+customElements.define('vue-chart-card', VueChartCard);
 
 if (environment.production) {
   enableProdMode();

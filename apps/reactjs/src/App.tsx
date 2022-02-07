@@ -20,6 +20,8 @@ function App() {
     return length > 0 ? serie[length - 1] : 0;
   }, [serie])
 
+  console.log("SERIE IN REACT", serie, typeof serie);
+
   return (
     <div className="App">
       <div className="controls">
@@ -64,6 +66,18 @@ function App() {
         <h2 className="balance-card__title">Balance:</h2>
         <div className="balance-card__amount">{balance} €</div>
       </chart-card>
+      {/* <ce-chart-card
+        className="balance-card"
+        serie={serie}
+        background-color={bgColor}
+        line-color={lineColor}
+        chart-width={width}
+        chart-height={height}
+      >
+        <h2 className="balance-card__title">Balance:</h2>
+        <div className="balance-card__amount">{balance} €</div>
+      </ce-chart-card> */}
+      <vue-test serie={[12, 56]}></vue-test>
     </div>
   )
 }

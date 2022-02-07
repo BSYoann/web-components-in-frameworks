@@ -56,6 +56,18 @@
     <h2 class="balance-card__title">Balance:</h2>
     <div class="balance-card__amount">{balance} €</div>
   </chart-card>
+  <vue-chart-card
+    class="balance-card"
+    serie={serie}
+    background-color={bgColor}
+    line-color={lineColor}
+    chart-width={width}
+    chart-height={height}
+  >
+    <h2 class="balance-card__title">Balance:</h2>
+    <div class="balance-card__amount">{balance} €</div>
+  </vue-chart-card>
+  <vue-test serie={serie}></vue-test>
 </main>
 
 <style>

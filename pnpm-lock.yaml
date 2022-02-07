@@ -172,6 +172,25 @@ importers:
       webpack-cli: 4.9.2_19108610e47e80b101fe97b50133aa84
       webpack-dev-server: 4.7.4_webpack-cli@4.9.2+webpack@5.68.0
 
+  libs/vuechartcard:
+    specifiers:
+      '@types/chartist': ^0.11.1
+      '@vitejs/plugin-vue': ^2.0.0
+      chartist: ^0.11.4
+      typescript: ^4.4.4
+      vite: ^2.7.2
+      vue: ^3.2.19
+      vue-tsc: ^0.29.8
+    dependencies:
+      '@types/chartist': 0.11.1
+      chartist: 0.11.4
+      vue: 3.2.29
+    devDependencies:
+      '@vitejs/plugin-vue': 2.1.0_vite@2.7.13+vue@3.2.29
+      typescript: 4.5.5
+      vite: 2.7.13
+      vue-tsc: 0.29.8_typescript@4.5.5
+
 packages:
 
   /@ampproject/remapping/1.1.1:
