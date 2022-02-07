@@ -1,32 +1,14 @@
 <template>
   <div class="controls">
     <label for="width-range">Width</label>
-    <input
-      type="range"
-      name="height-range"
-      id="width-range"
-      min="100"
-      max="300"
-      v-model="width"
-    />
+    <input type="range" name="height-range" id="width-range" min="100" max="300" v-model="width" />
     <label for="height-range">Height</label>
-    <input
-      type="range"
-      name="height-range"
-      id="height-range"
-      min="40"
-      max="150"
-      v-model="height"
-    />
+    <input type="range" name="height-range" id="height-range" min="40" max="150" v-model="height" />
     <label for="bg-color">Background color: </label>
     <input id="bg-color" type="color" v-model="bgColor" />
     <label for="line-color">Line color: </label>
     <input id="line-color" type="color" v-model="lineColor" />
-    <input
-      type="button"
-      @click="serie = generateRandomArray()"
-      value="Generate data"
-    />
+    <input type="button" @click="serie = generateRandomArray()" value="Generate data" />
   </div>
   <ce-chart-card
     class="balance-card"
@@ -50,6 +32,17 @@
     <h2 class="balance-card__title">Balance:</h2>
     <div class="balance-card__amount">{{ currentBalance }} €</div>
   </ChartCardWrapper>
+  <ce-vue-chart-card
+    class="balance-card"
+    :serie.prop="serie"
+    :background-color="bgColor"
+    :line-color="lineColor"
+    :chart-width="width"
+    :chart-height="height"
+  >
+    <h2 class="balance-card__title">Balance:</h2>
+    <div class="balance-card__amount">{{ currentBalance }} €</div>
+  </ce-vue-chart-card>
 </template>
 
 <script lang="ts" setup>
@@ -64,9 +57,7 @@ const bgColor = ref("#191919");
 
 function generateRandomArray() {
   const arrayLength = 20;
-  return Array.from({ length: arrayLength }, () =>
-    Math.floor(Math.random() * 100)
-  );
+  return Array.from({ length: arrayLength }, () => Math.floor(Math.random() * 100));
 }
 
 const serie = ref<number[]>(generateRandomArray());
