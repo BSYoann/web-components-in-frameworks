@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "",
+    "module": "es6",
+    "target": "es2017",
+    "alwaysStrict": true,
+    "lib": ["dom", "es2015", "es2017"],
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js"],
+  "exclude": ["node_modules", "dist", "rollup.config.js"]
+}
