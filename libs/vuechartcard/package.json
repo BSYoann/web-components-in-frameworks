@@ -1,0 +1,31 @@
+{
+  "name": "@bsyoann/vuechartcard",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.19",
+    "@types/chartist": "^0.11.1",
+    "chartist": "^0.11.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2",
+    "vue-tsc": "^0.29.8"
+  }
+}
