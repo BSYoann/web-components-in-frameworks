@@ -33,14 +33,13 @@ const chart = ref<IChartistLineChart>();
 const rootRef = ref<HTMLElement>();
 const chartContainerRef = ref<HTMLElement | undefined>();
 let oldData: any = null;
-
 const series = computed(() => (props.serie ? [props.serie] : [[]]));
-
 watch(
   () => props.serie,
   () => {
     chart.value?.update({ series: series.value });
-  }
+  },
+  { deep: true }
 );
 watch(
   () => props.lineColor,
@@ -72,8 +71,20 @@ watch(
     chart.value?.update(null, { height: newValue }, true);
   }
 );
-
 onMounted(() => {
+  // since rootRef is undefined until mounted, we have to set CSS Vars on mount once
+  if (props.lineColor) {
+    rootRef.value?.style.setProperty("--line-color", props.lineColor);
+  }
+  if (props.backgroundColor) {
+    rootRef.value?.style.setProperty("--bg-color", props.backgroundColor);
+  }
+
+  // workaround if serie is a string on mount
+  if (typeof props.serie === "string") {
+    // @ts-ignore
+    props.serie = props.serie.split(",").map((e) => Number.parseInt(e));
+  }
   const data = {
     series: series.value,
   };
@@ -98,9 +109,7 @@ onMounted(() => {
       showLabel: false,
     },
   };
-
   chart.value = new Chartist.Line(chartContainerRef.value, data, options);
-
   chart.value.on("draw", (data: any) => {
     if (data.type === "line") {
       let fromAnimation = data.path
@@ -130,7 +139,6 @@ onMounted(() => {
 :host {
   --bg-color: #191919;
   --line-color: #2220a4;
-
   display: inline-block;
   overflow: hidden;
   border-radius: 1rem;
@@ -152,7 +160,6 @@ onMounted(() => {
   fill: none;
   stroke-width: 5px;
 }
-
 .grad-bg {
   color: var(--bg-color, #fff);
 }

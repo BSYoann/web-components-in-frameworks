@@ -64,6 +64,17 @@ function App() {
         <h2 className="balance-card__title">Balance:</h2>
         <div className="balance-card__amount">{balance} €</div>
       </chart-card>
+      <vue-chart-card
+        className="balance-card"
+        serie={serie}
+        background-color={bgColor}
+        line-color={lineColor}
+        chart-width={width}
+        chart-height={height}
+      >
+        <h2 className="balance-card__title">Balance:</h2>
+        <div className="balance-card__amount">{balance} €</div>
+      </vue-chart-card>
     </div>
   )
 }
