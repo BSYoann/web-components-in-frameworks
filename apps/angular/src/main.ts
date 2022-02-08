@@ -5,7 +5,6 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import { ChartCard } from '@bsyoann/chartcard';
-// @ts-ignore
 import { VueChartCard } from '@bsyoann/vue-component-lib';
 
 customElements.define('chart-card', ChartCard);

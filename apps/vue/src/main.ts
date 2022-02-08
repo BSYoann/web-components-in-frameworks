@@ -1,4 +1,4 @@
-import { createApp, defineCustomElement } from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import { ChartCard } from "@bsyoann/chartcard";
 import { VueChartCard } from "@bsyoann/vue-component-lib";
