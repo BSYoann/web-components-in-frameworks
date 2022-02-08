@@ -16,8 +16,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "vue-ce",
-      fileName: (format) => `vue-ce.${format}.js`,
+      name: "vue-component-lib",
+      fileName: (format) => `vue-component-lib.${format}.js`,
     },
   },
 });

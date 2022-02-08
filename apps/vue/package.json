@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@bsyoann/chartcard": "workspace:^1.0.0",
+    "@bsyoann/vue-component-lib": "workspace:^1.0.0",
     "chartist": "^0.11.4",
     "vue": "^3.2.25"
   },

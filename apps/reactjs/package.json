@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@bsyoann/chartcard": "workspace:^1.0.0",
+    "@bsyoann/vue-component-lib": "workspace:^1.0.0",
     "react": "^0.0.0-experimental-848e802d2-20220204",
     "react-dom": "^0.0.0-experimental-848e802d2-20220204"
   },

@@ -6,7 +6,7 @@ import { environment } from './environments/environment';
 
 import { ChartCard } from '@bsyoann/chartcard';
 // @ts-ignore
-import { VueChartCard } from '../../../libs/vue-component-lib/dist/vue-ce.es.js';
+import { VueChartCard } from '@bsyoann/vue-component-lib';
 
 customElements.define('chart-card', ChartCard);
 customElements.define('vue-chart-card', VueChartCard);

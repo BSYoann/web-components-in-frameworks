@@ -16,6 +16,7 @@ importers:
       '@angular/platform-browser-dynamic': ~13.2.0
       '@angular/router': ~13.2.0
       '@bsyoann/chartcard': workspace:^1.0.0
+      '@bsyoann/vue-component-lib': workspace:^1.0.0
       '@types/express': 4.17.13
       '@types/jasmine': ~3.10.0
       '@types/node': ^12.11.1
@@ -39,6 +40,7 @@ importers:
       '@angular/platform-browser-dynamic': 13.2.1_7ce2fb6f4e2fac7ddcb83e7c715e6bde
       '@angular/router': 13.2.1_067d20683e3610fe477d10fcb63a25eb
       '@bsyoann/chartcard': link:../../libs/chartcard
+      '@bsyoann/vue-component-lib': link:../../libs/vue-component-lib
       rxjs: 7.5.2
       tslib: 2.3.1
       zone.js: 0.11.4
@@ -60,6 +62,7 @@ importers:
   apps/reactjs:
     specifiers:
       '@bsyoann/chartcard': workspace:^1.0.0
+      '@bsyoann/vue-component-lib': workspace:^1.0.0
       '@types/react': ^17.0.33
       '@types/react-dom': ^17.0.10
       '@vitejs/plugin-react': ^1.0.7
@@ -69,6 +72,7 @@ importers:
       vite: ^2.7.2
     dependencies:
       '@bsyoann/chartcard': link:../../libs/chartcard
+      '@bsyoann/vue-component-lib': link:../../libs/vue-component-lib
       react: 0.0.0-experimental-848e802d2-20220204
       react-dom: 0.0.0-experimental-848e802d2-20220204_50dcabc05f4e49acf95e238d27d7d80b
     devDependencies:
@@ -81,6 +85,7 @@ importers:
   apps/svelte:
     specifiers:
       '@bsyoann/chartcard': workspace:^1.0.0
+      '@bsyoann/vue-component-lib': workspace:^1.0.0
       '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
       '@tsconfig/svelte': ^2.0.1
       svelte: ^3.44.0
@@ -91,6 +96,7 @@ importers:
       vite: ^2.7.2
     dependencies:
       '@bsyoann/chartcard': link:../../libs/chartcard
+      '@bsyoann/vue-component-lib': link:../../libs/vue-component-lib
     devDependencies:
       '@sveltejs/vite-plugin-svelte': 1.0.0-next.37_svelte@3.46.4+vite@2.7.13
       '@tsconfig/svelte': 2.0.1
@@ -113,6 +119,7 @@ importers:
   apps/vue:
     specifiers:
       '@bsyoann/chartcard': workspace:^1.0.0
+      '@bsyoann/vue-component-lib': workspace:^1.0.0
       '@originjs/vite-plugin-commonjs': ^1.0.2
       '@vitejs/plugin-vue': ^2.0.0
       chartist: ^0.11.4
@@ -122,6 +129,7 @@ importers:
       vue-tsc: ^0.29.8
     dependencies:
       '@bsyoann/chartcard': link:../../libs/chartcard
+      '@bsyoann/vue-component-lib': link:../../libs/vue-component-lib
       chartist: 0.11.4
       vue: 3.2.29
     devDependencies:

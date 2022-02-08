@@ -1,7 +1,7 @@
 import App from "./App.svelte";
 
 import { ChartCard } from "@bsyoann/chartcard";
-import { VueChartCard } from "../../../libs/vue-component-lib/dist/vue-ce.es.js";
+import { VueChartCard } from "@bsyoann/vue-component-lib";
 
 customElements.define("chart-card", ChartCard);
 // @ts-ignore
